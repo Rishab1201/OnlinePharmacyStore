@@ -1,0 +1,655 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --orange: rbg(255, 165, 0);
+  --earthly-green: #075159;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&family=Roboto:wght@300;400&display=swap");
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.site-container {
+  min-height: 100vh;
+}
+main {
+  flex: 1;
+}
+.btn-primary,
+.btn-outline-primary {
+  background-color: #6366f1;
+  color: #ffffff;
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.rating span {
+  color: #f97316;
+}
+
+.product {
+  border: 1px #6366f1;
+  margin: 1rem;
+}
+.product img {
+  width: 100%;
+  max-width: 400px;
+}
+.product-info {
+  padding: 1rem;
+}
+.img-large {
+  max-width: 100%;
+}
+.img-thumbnail {
+  height: 80px;
+}
+.small-container {
+  max-width: 600px;
+}
+
+.checkout-steps > div {
+  border-bottom: 0.2rem solid #a0a0a0;
+  color: #636363;
+}
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid red;
+  color: #000000;
+}
+
+/* sidebar */
+.navbar-brand {
+  font-weight: bold;
+}
+.side-navbar {
+  width: 200px;
+  height: 100%;
+  position: absolute;
+  left: -300px;
+  background-color: #100901;
+  transition: 0.5s;
+}
+
+.site-container {
+  transition: 0.4s;
+}
+.active-cont {
+  margin-left: 240px;
+}
+.active-nav {
+  left: 0;
+}
+.text-bold {
+  font-weight: bold;
+}
+
+/* Map */
+
+.full-box {
+  height: 100vh;
+  max-width: initial;
+}
+.full-box header,
+.full-box footer {
+  display: none;
+}
+.full-box .container {
+  height: 100vh;
+  max-width: initial;
+  margin: 0;
+  padding: 0;
+}
+
+.full-box .mt-3 {
+  margin-top: 0 !important;
+}
+
+.map-input-box {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0.5rem auto;
+  width: 25rem;
+  height: 3rem;
+  display: flex;
+}
+.map-input-box input {
+  border-radius: 1rem 0 0 1rem;
+  border-right: 0;
+}
+.map-input-box button {
+  border-radius: 0 1rem 1rem 0;
+  border-left: 0;
+}
+button.thumbnail {
+  padding: 0;
+}
+
+/* Seach button */
+
+#button-search:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#button-search {
+  border: 1px solid gray;
+  background-color: orange;
+}
+
+#button-search:hover {
+  background-color: #ffc107;
+}
+
+/* search input */
+#q:focus {
+  outline: none;
+  box-shadow: none;
+}
+#q {
+  background-color: transparent;
+  color: rgb(34, 33, 33);
+  border: 1px solid gray;
+}
+
+#q::placeholder {
+  color: gray;
+}
+
+#sideBarButton {
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: #a0a0a0;
+}
+
+#sideBarButton:hover {
+  color: orange;
+}
+
+/* user name dropdown */
+
+#basic-nav-dropdown {
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Cart Button */
+
+.nav-link {
+  font-family: "Roboto", sans-serif;
+}
+
+.nav-link:hover {
+  color: #ffc107;
+}
+
+/* Admin nav dropdown */
+
+#admin-nav-dropdown {
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+/* banner */
+
+/* .banner {
+  position: relative;
+}
+
+.overflow-hidden {
+  position: absolute;
+} */
+
+/* .banner{
+  position: relative;
+} */
+
+.sub-banner {
+  position: absolute;
+  bottom: 60%;
+  /* left: 5%; */
+  /* position: sticky;
+  margin-left: 50px; */
+}
+
+.header {
+  margin: 0.25rem 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #000000;
+  text-align: left;
+}
+
+p {
+  margin: 0.5rem 0;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+}
+
+/* animation class and keyframes */
+
+.banner {
+  background-image: url("https://www.ayurkart.com/cdn/shop/files/kottakkal-ayurvedic-medicines-slider_2048x.jpg?v=1639652056");
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.drop-in {
+  animation: drop-in 1s ease 200ms backwards;
+}
+
+.drop-in-2 {
+  animation: drop-in 1200ms ease 500ms backwards;
+  margin-right: 30px;
+  color: #000000;
+  text-align: left;
+}
+
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0px);
+  }
+}
+
+.banner-button {
+  width: 130px;
+  height: 35px;
+  background-color: #f97316;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 1px;
+  margin: 10px;
+}
+
+.banner-button:hover {
+  background-color: rgb(255, 165, 0);
+}
+
+/* Carousel */
+
+/* .carousel {
+  height: 80vh;
+} */
+
+/* Cart Button */
+
+.nav-link {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  margin-right: 20px;
+  /* margin-left: 10px; */
+}
+
+.nav-link:hover {
+  background-color: orange;
+}
+
+/* Product description Submit button */
+
+.submit-button {
+  background-color: #075159;
+}
+
+/* Product desciption form select */
+
+.form-select:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #075159;
+}
+
+.form-select {
+  border: none;
+  border: 1px solid #075159;
+}
+
+/* ShopScreen select box
+
+.select-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 200px;
+  height: 30px;
+}
+
+.select-box {
+  border: none;
+  box-shadow: none;
+  appearance: none;
+  padding: 0 30px 0 15px;
+  width: 100%;
+  background-color: #075159;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+.select-box option::selection{
+  background-color: orange;
+} */
+
+/* ShopScreen Header section */
+
+.section-header {
+  margin-bottom: 35px;
+  width: 600px;
+}
+
+.section-header .h2 {
+  font-size: 50px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  font-family: "Roboto", "Calibri", "Calibri", sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  color: black;
+  position: relative;
+}
+
+/* .section-header .h2 span:before {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 50px;
+  right: -62px;
+  background: #075159;
+  top: 11px;
+} */
+
+.section-header .h2 span::before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 125px;
+  left: 597px;
+  background-color: #075159;
+  top: 29px;
+  border-radius: 10px;
+}
+
+.section-header .h2 span::after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 125px;
+  right: 597px;
+  background-color: #075159;
+  top: 29px;
+  border-radius: 10px;
+}
+
+.section-header p {
+  margin-bottom: 30px;
+}
+
+/* ============= Home Screen Page heading =============*/
+
+.home-section {
+  margin-bottom: 35px;
+  width: 600px;
+}
+
+.home-section .h3 {
+  font-size: 25px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  font-family: "Roboto", "Calibri", "Calibri", sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  color: black;
+  position: relative;
+}
+
+.home-section .h3 span::before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 55px;
+  right: 112px;
+  background-color: #075159;
+  top: 11px;
+  border-radius: 10px;
+}
+
+.home-section .h3 span::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 55px;
+  left: 108px;
+  background-color: #075159;
+  top: 11px;
+  border-radius: 10px;
+}
+
+.home-section p {
+  margin-bottom: 20px;
+  color: #8d8d8d;
+}
+
+.products {
+  position: relative;
+}
+
+.product-container {
+  /* padding: 0 10vw;
+  display: flex; */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.product-container::-webkit-scrollbar {
+  display: none;
+}
+
+.pre-btn,
+.nxt-btn {
+  border: none;
+  width: 10vw;
+  height: 60%;
+  position: absolute;
+  top: 730px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
+  cursor: pointer;
+  z-index: 8;
+}
+
+.pre-btn {
+  left: 0;
+}
+
+.nxt-btn {
+  right: 0;
+  transform: rotate(180deg);
+}
+
+.pre-btn img,
+.nxt-btn img {
+  opacity: 0.2;
+}
+.pre-btn:hover img,
+.nxt-btn:hover img {
+  opacity: 1;
+}
+
+.porduct-map {
+  transform: translate3d(-780px, 0, 0);
+}
+
+/* ShopScreen Pagination */
+
+.page-button {
+  width: 90px;
+  height: 30px;
+  border-radius: 20px;
+  background-color: #075159;
+  margin: 10px;
+}
+
+.page-links {
+  border-radius: 10px;
+  border-left: 20px;
+  width: 90px;
+  height: fit-content;
+  color: white;
+}
+
+.page-links:hover {
+  color: white;
+}
+
+.page-button:hover {
+  background-color: #055861;
+}
+
+/* ========================= Contact Us Page =========================== */
+
+.custom-gradient {
+  background-image: linear-gradient(to right, #127d89, #075159);
+}
+
+.form-group {
+  border-bottom: 2px solid gray;
+}
+
+.form-control {
+  background: transparent;
+  border: none;
+}
+
+.form-control::placeholder {
+  color: white;
+}
+
+.button {
+  border-radius: 4px;
+  background-color: orange;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 28px;
+  padding-bottom: 15px;
+  width: 140px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 10px;
+  height: 50px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  text-align: center;
+  font-size: 25px;
+}
+
+.button span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+/* Ayurved Page  */
+
+.page-width {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.page-header {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  font-size: 20px;
+}
+
+.grid {
+  zoom: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-left: -30px;
+}
+
+.grid_item {
+  float: left;
+  padding-left: 30px;
+  width: 100%;
+}
+
+.rte:last-child {
+  margin-bottom: 0;
+}
+
+.rte {
+  color: #555555;
+  margin-bottom: 20px;
+}
+
+.rte {
+  font-weight: bold;
+}
+
+.rte p {
+  font-size: 15px;
+}
+
+.rte a {
+  color: #075159;
+  text-decoration: none;
+  outline: none;
+}
+
+.rte a:hover {
+  color: orange;
+}
