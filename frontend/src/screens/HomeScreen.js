@@ -24,7 +24,7 @@ const reducer = (state, action) => {
   }
 };
 
-function HomeScreen() {
+function HomeScreen({ brand }) {
   const [{ loading, error, products }, dispatch] = useReducer(reducer, {
     products: [],
     loading: true,
@@ -155,6 +155,29 @@ function HomeScreen() {
           </div>
         </div>
       </div> */}
+
+      <div className="w-full h-[35vh] bg-earthly-green">
+        <div className="flex align-middle justify-center text-center py-5 px-5">
+          <div>
+            <h1 className="text-white text-4xl">
+              Buy Ayurvedic Medicine & Products Online from Ayurvedic Shopping
+              Store
+            </h1>
+            <p className="text-white text-sm pt-3">
+              Ayurkart, the online ayurvedic store sells all kinds of ayurvedic
+              medicine and ayurvedic products online from India's top most
+              ayurvedic brands like Kottakkal Arya Vaidya Sala, Vaidyaratnam,
+              AVP, Kerala Ayurveda, Himalaya, Dabur, Zandu Ayurveda & Alarsin
+              etc.,
+            </p>
+
+            <p className="text-white text-sm pt-3 pb-3">
+              Our aims to bring the world of authentic ayurvedic herbs and
+              ayurvedic medicines to you.
+            </p>
+          </div>
+        </div>
+      </div>
 
       <div>
         <Helmet>

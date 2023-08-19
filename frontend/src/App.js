@@ -39,6 +39,7 @@ import ShopScreen from "./screens/ShopScreen";
 import ContactScreen from "./screens/ContactScreen";
 import AyurvedaScreen from "./screens/AyurvedaScreen";
 import AboutScreen from "./screens/AboutScreen";
+import Footer from './components/Footer.js'
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -247,6 +248,7 @@ function App() {
             )}
           </Nav>
         </div>
+
         <main>
           <Container className="mt-3">
             <Routes>
@@ -352,7 +354,8 @@ function App() {
           </Container>
         </main>
         <footer>
-          <div className="text-center">All rights reserved @ AyurVedaMart</div>
+          {/* <div className="text-center">All rights reserved @ AyurVedaMart</div> */}
+          <Footer/>
         </footer>
       </div>
     </BrowserRouter>
