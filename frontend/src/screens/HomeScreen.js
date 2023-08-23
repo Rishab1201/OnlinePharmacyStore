@@ -9,6 +9,7 @@ import MessageBox from "../components/MessageBox";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import Feature from "./Features";
 // import data from '../data';
 
 const reducer = (state, action) => {
@@ -230,6 +231,10 @@ function HomeScreen({ brand }) {
         <button class="nxt-btn">
           <img src="./images/arrow.png" alt="" onClick={nextPage} />
         </button>
+      </div>
+
+      <div>
+        <Feature/>
       </div>
     </>
   );

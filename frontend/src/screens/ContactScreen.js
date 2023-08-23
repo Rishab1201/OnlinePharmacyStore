@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import Axios from 'axios';
+import { Store } from '../Store';
 
 const ContactScreen = () => {
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -17,11 +21,17 @@ const ContactScreen = () => {
         subject: subject,
         message: message,
       };
+
+      const {data}  = await Axios.post(`/api/contacts/contact`, records,{
+        headers: { authorization: `Bearer ${userInfo.token}` },
+      });
+
+      console.log("inserted data",data);
       toast.success("RECODES CREATED");
     } catch (error) {
       toast.error(error);
     }
-  };
+};
 
   return (
     <section className="contact-section">

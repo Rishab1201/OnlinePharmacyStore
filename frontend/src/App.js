@@ -355,7 +355,7 @@ function App() {
         </main>
         <footer>
           {/* <div className="text-center">All rights reserved @ AyurVedaMart</div> */}
-          <Footer/>
+          <Footer className="bg-gray-900"/>
         </footer>
       </div>
     </BrowserRouter>

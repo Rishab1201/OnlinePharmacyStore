@@ -6,7 +6,7 @@ function Sidebar({ categories, setSidebarIsOpen, userInfo }) {
 
   return (
     <>
-      <div className="flex overflow-hidden bg-white rounded-lg h-screen z-20">
+      <div className="flex overflow-hidden bg-white rounded-lg h-screen z-20 sticky top-0">
         <div className="hidden md:flex md:flex-shrink-0">
           <div className="flex flex-col w-64">
             <div className="flex flex-col flex-grow pt-5 overflow-y-auto border-2 rounded-lg bg-stone-900 ">
