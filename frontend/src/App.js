@@ -39,7 +39,8 @@ import ShopScreen from "./screens/ShopScreen";
 import ContactScreen from "./screens/ContactScreen";
 import AyurvedaScreen from "./screens/AyurvedaScreen";
 import AboutScreen from "./screens/AboutScreen";
-import Footer from './components/Footer.js'
+import Footer from "./components/Footer.js";
+import AdminContact from "./screens/AdminContact";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -162,15 +163,24 @@ function App() {
               HOME
             </Link>
 
-            <Link to="/aboutus" className="nav-link text-lg text-white text-center ">
+            <Link
+              to="/aboutus"
+              className="nav-link text-lg text-white text-center "
+            >
               ABOUT US
             </Link>
 
-            <Link to="/ayurveda" className="nav-link text-lg text-white text-center ">
+            <Link
+              to="/ayurveda"
+              className="nav-link text-lg text-white text-center "
+            >
               AYURVEDA
             </Link>
 
-            <Link to="/contactus" className="nav-link text-lg text-white text-center ">
+            <Link
+              to="/contactus"
+              className="nav-link text-lg text-white text-center "
+            >
               CONTACT US
             </Link>
 
@@ -244,6 +254,9 @@ function App() {
                 <LinkContainer to="/admin/users">
                   <NavDropdown.Item>Users</NavDropdown.Item>
                 </LinkContainer>
+                <LinkContainer to="/admin/contactus">
+                  <NavDropdown.Item>User Contacts</NavDropdown.Item>
+                </LinkContainer>
               </NavDropdown>
             )}
           </Nav>
@@ -254,9 +267,9 @@ function App() {
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
-              <Route path="/contactus" element={<ContactScreen/>} />
-              <Route path="/aboutus" element={<AboutScreen/>} />
-              <Route path="/ayurveda" element={<AyurvedaScreen/>} />
+              <Route path="/contactus" element={<ContactScreen />} />
+              <Route path="/aboutus" element={<AboutScreen />} />
+              <Route path="/ayurveda" element={<AyurvedaScreen />} />
               <Route path="/shop" element={<ShopScreen />} />
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
@@ -308,6 +321,16 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
+
+              <Route
+                path="/admin/contactus"
+                element={
+                  <AdminRoute>
+                    <AdminContact />
+                  </AdminRoute>
+                }
+              ></Route>
+
               <Route
                 path="/admin/orders"
                 element={
@@ -349,13 +372,22 @@ function App() {
                 }
               ></Route>
 
+              {/* <Route
+              path="/admin/contactus"
+              element={
+                <AdminRoute>
+                  <AdminContact/>
+                </AdminRoute>
+              }>
+              </Route> */}
+
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
         </main>
         <footer>
           {/* <div className="text-center">All rights reserved @ AyurVedaMart</div> */}
-          <Footer className="bg-gray-900"/>
+          <Footer className="bg-gray-900" />
         </footer>
       </div>
     </BrowserRouter>

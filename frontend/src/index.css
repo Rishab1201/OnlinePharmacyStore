@@ -561,7 +561,7 @@ p {
   display: grid;
   grid-template-columns: auto auto auto auto;
   grid-row-gap: 110px;
-  grid-column-gap: 65px;
+  grid-column-gap: 50px;
 
 }
 
@@ -611,6 +611,8 @@ p {
   margin-bottom: 20px;
   color: #8d8d8d;
 }
+
+
 
 /* ShopScreen Pagination */
 

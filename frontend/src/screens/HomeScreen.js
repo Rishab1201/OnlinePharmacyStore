@@ -236,7 +236,7 @@ function HomeScreen() {
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
             <div className="product-container  mx-2">
-              {products.map((product) => (
+              {products.slice(0,12).map((product) => (
                 <Product
                   product={product}
                   className="product-map my-3"
@@ -255,11 +255,11 @@ function HomeScreen() {
       </div>
 
       <div className="flex align-middle justify-center">
-        <div className=" home-section3 text-center pt-10 uppercase">
-          <h3 className="h3-brand">
-            <span>Ayurvedic Pharmacies In India</span>
+        <div className=" home-section text-center pt-10 uppercase">
+          <h3 className="h3">
+            <span>Top-notch Brands</span>
           </h3>
-          <p>Pick our top ayurvedic brands</p>
+          <p>Explore Trusted Brands in Ayurvedic Wellness</p>
         </div>
       </div>
 
@@ -269,7 +269,7 @@ function HomeScreen() {
 
       <div className="flex align-middle justify-between m-6">
         <div className="border-1 rounded-xl shadow-md hover:shadow-lg">
-          <img src="./images/40452.jpg" className="h-[90vh] w-[90hh]" />
+          <img src="./images/40452.jpg" className=".home-image h-[90vh] w-[90hh]" />
         </div>
 
         <div className="border-1 rounded-xl shadow-md hover:shadow-lg">

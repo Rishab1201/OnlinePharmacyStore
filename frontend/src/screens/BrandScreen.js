@@ -39,206 +39,86 @@ export const BrandScreen = () => {
           </svg>
         </div>
         <div className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Brand 1 */}
+
           <div className="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
             <div className="p-5">
-              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-indigo-50">
-                <svg
-                  className="w-8 h-8 text-deep-purple-accent-400"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
-              </div>
-              <p className="mb-2 font-bold">Football Sports</p>
-              <p className="text-sm leading-5 text-gray-900">
-                Sed ut perspiciatis unde omnis iste. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit.
-              </p>
+              <p className="mb-2 font-bold truncate">Kottakkal Ayurveda</p>
+              <img src="https://www.ayurkart.com/cdn/shop/collections/kottakkal-arya-vaidya-sala_large.jpg?v=1639211933" />
             </div>
             <div className="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-deep-purple-accent-400 group-hover:scale-x-100" />
           </div>
+
+          {/* Brand 2 */}
+
           <div className="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
             <div className="p-5">
-              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-indigo-50">
-                <svg
-                  className="w-8 h-8 text-deep-purple-accent-400"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
-              </div>
-              <p className="mb-2 font-bold">Bowling Sports</p>
-              <p className="text-sm leading-5 text-gray-900">
-                Disrupt inspire and think tank, social entrepreneur but
-                preliminary thinking think tank compelling.
-              </p>
+              <p className="mb-2 font-bold ">Vaidyaratnam</p>
+              <img src="https://www.ayurkart.com/cdn/shop/collections/vaidyaratnam-logo_large.png?v=1639211952" />
             </div>
             <div className="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-deep-purple-accent-400 group-hover:scale-x-100" />
           </div>
+
+          {/* Brand 3 */}
+
           <div className="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
             <div className="p-5">
-              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-indigo-50">
-                <svg
-                  className="w-8 h-8 text-deep-purple-accent-400"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
-              </div>
-              <p className="mb-2 font-bold">Cycling Sports</p>
-              <p className="text-sm leading-5 text-gray-900">
-                A slice of heaven. O for awesome, this chocka full cuzzie is as
-                rip-off as a cracker.
-              </p>
+              <p className="mb-2 font-bold">Alarsin</p>
+              <img src="https://www.ayurkart.com/cdn/shop/collections/alarsin-logo_large.jpg?v=1639212129" />
             </div>
             <div className="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-deep-purple-accent-400 group-hover:scale-x-100" />
           </div>
+
+          {/* Brand 4 */}
+
           <div className="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
             <div className="p-5">
-              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-indigo-50">
-                <svg
-                  className="w-8 h-8 text-deep-purple-accent-400"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
-              </div>
-              <p className="mb-2 font-bold">Weight Lifting Sports</p>
-              <p className="text-sm leading-5 text-gray-900">
-                Meanwhile, in behind the bicycle shed, Hercules Morse, as big as
-                a horse.
-              </p>
+              <p className="mb-2 font-bold">AVN</p>
+              <img src="https://www.ayurkart.com/cdn/shop/collections/avn-logo_large.png?v=1639212401" />
             </div>
             <div className="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-deep-purple-accent-400 group-hover:scale-x-100" />
           </div>
+
+          {/* Brand 5 */}
+
           <div className="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
             <div className="p-5">
-              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-indigo-50">
-                <svg
-                  className="w-8 h-8 text-deep-purple-accent-400"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
-              </div>
-              <p className="mb-2 font-bold">Golf Sports</p>
-              <p className="text-sm leading-5 text-gray-900">
-                Disrupt inspire and think tank, social entrepreneur but
-                preliminary thinking think tank compelling.
-              </p>
+              <p className="mb-2 font-bold">AVP Ayurveda</p>
+              <img src="https://www.ayurkart.com/cdn/shop/collections/avp-arya-vaidya-pharmacy_large.jpg?v=1639212731" />
             </div>
             <div className="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-deep-purple-accent-400 group-hover:scale-x-100" />
           </div>
+
+          {/* Brand 6 */}
+
           <div className="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
             <div className="p-5">
-              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-indigo-50">
-                <svg
-                  className="w-8 h-8 text-deep-purple-accent-400"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
-              </div>
-              <p className="mb-2 font-bold">Hockey Sports</p>
-              <p className="text-sm leading-5 text-gray-900">
-                A business big enough that it could be listed on the NASDAQ goes
-                belly up.
-              </p>
+              <p className="mb-2 font-bold">Dabur</p>
+              <img src="https://www.ayurkart.com/cdn/shop/collections/Dabur_Logo_large.png?v=1639213296" />
             </div>
             <div className="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-deep-purple-accent-400 group-hover:scale-x-100" />
           </div>
+
+          {/* Brand 7 */}
+
           <div className="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
             <div className="p-5">
-              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-indigo-50">
-                <svg
-                  className="w-8 h-8 text-deep-purple-accent-400"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
-              </div>
-              <p className="mb-2 font-bold">Shooting Sports</p>
-              <p className="text-sm leading-5 text-gray-900">
-                Lookout flogging bilge rat main sheet bilge water nipper fluke
-                to go on account heave down clap of thunder.
-              </p>
+              <p className="mb-2 font-bold">Himalaya</p>
+              <img src="https://www.ayurkart.com/cdn/shop/collections/Himalaya-Logo-menu_large.png?v=1639213385" />
             </div>
             <div className="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-deep-purple-accent-400 group-hover:scale-x-100" />
           </div>
+
+          {/* Brand 8 */}
+
           <div className="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
             <div className="p-5">
-              <div className="flex items-center justify-center w-10 h-10 mb-4 rounded-full bg-indigo-50">
-                <svg
-                  className="w-8 h-8 text-deep-purple-accent-400"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
-              </div>
-              <p className="mb-2 font-bold">Martial Arts</p>
-              <p className="text-sm leading-5 text-gray-900">
-                Webtwo ipsum orkut reddit meebo skype vimeo jajah spock empressr
-                zimbra, mobly napster.
-              </p>
+              <p className="mb-2 font-bold truncate">Maharishi Ayurveda</p>
+              <img src="https://www.ayurkart.com/cdn/shop/collections/maharishi-ayurveda_large.jpg?v=1639214093" />
             </div>
             <div className="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-deep-purple-accent-400 group-hover:scale-x-100" />
           </div>
+          
         </div>
       </div>
     </div>
