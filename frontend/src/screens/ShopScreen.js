@@ -198,9 +198,9 @@ function ShopScreen() {
           ) : error ? (
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
-            <div className="flex justify-center align-middle flex-wrap mx-2">
+            <div className="product-container flex mx-2">
               {records.map((product) => (
-                <Product product={product} className="my-2"></Product>
+                <Product product={product} className="product-map my-4"></Product>
               ))}
             </div>
           )}

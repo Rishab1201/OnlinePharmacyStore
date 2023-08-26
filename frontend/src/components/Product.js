@@ -53,7 +53,7 @@ function Product(props) {
       <div className="w-full mx-2 my-2">
         <div className="flex flex-col justify-center p-10 bg-white rounded-lg shadow-2xl card">
           <div className="prod-title">
-            <p className="text-sm underline md:underline-offset-4 font-bold text-gray-900 uppercase">
+            <p className="text-lg underline md:underline-offset-4 font-bold text-gray-900 uppercase truncate">
               {product.name}
             </p>
           </div>

@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useState, useContext } from "react";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -10,7 +10,9 @@ import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Feature from "./Features";
+import { Store } from "../Store";
 // import data from '../data';
+import BrandScreen from "./BrandScreen";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -25,36 +27,51 @@ const reducer = (state, action) => {
   }
 };
 
-function HomeScreen({ brand }) {
+function HomeScreen() {
+  const { state } = useContext(Store);
+  const { userInfo } = state;
   const [{ loading, error, products }, dispatch] = useReducer(reducer, {
     products: [],
     loading: true,
     error: "",
   });
-  // const [products, setProducts] = useState([]);
+  //  const [product, setProduct] = useState([]);
+
   useEffect(() => {
+    // const fetchData = async () => {
+    //   dispatch({ type: "FETCH_REQUEST" });
+    //   try {
+    //     const result = await axios.get("/api/products");
+    //     dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+    //   } catch (err) {
+    //     dispatch({ type: "FETCH_FAIL", payload: err.message });
+    //   }
+
+    //   //setProducts(result.data);
+    // };
+    // fetchData();
+
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await axios.get("/api/products");
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+        const result = await axios.get("/api/products/latestProducts");
+        dispatch({ type: "FETCH_SUCCESS", payload: result.data.products });
+        console.log("latest data", result.data.products);
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
-
-      // setProducts(result.data);
     };
     fetchData();
   }, []);
 
   // Pagination Variables
-  const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 4;
-  const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
-  const records = products.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(products.length / recordsPerPage);
-  const numbers = [...Array(npage + 1).keys()].slice(1);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const recordsPerPage = 4;
+  // const lastIndex = currentPage * recordsPerPage;
+  // const firstIndex = lastIndex - recordsPerPage;
+  // const records = products.slice(firstIndex, lastIndex);
+  // const npage = Math.ceil(products.length / recordsPerPage);
+  // const numbers = [...Array(npage + 1).keys()].slice(1);
 
   // https://images.unsplash.com/photo-1561069934-eee225952461?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80
   return (
@@ -193,9 +210,9 @@ function HomeScreen({ brand }) {
           </div>
         </div>
 
-        <button class="pre-btn">
+        {/* <button class="pre-btn">
           <img src="./images/arrow.png" alt="" onClick={perPage} />
-        </button>
+        </button> */}
 
         {/* <div className="products">
           {loading ? (
@@ -218,37 +235,65 @@ function HomeScreen({ brand }) {
           ) : error ? (
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
-            <div className="product-container flex justify-center align-middle flex-wrap mx-2">
-              {records.slice(0, 8).map((product) => (
+            <div className="product-container  mx-2">
+              {products.map((product) => (
                 <Product
                   product={product}
-                  className="product-map my-2"
+                  className="product-map my-3"
                 ></Product>
               ))}
             </div>
           )}
         </div>
-        <button class="nxt-btn">
+        {/* <button class="nxt-btn">
           <img src="./images/arrow.png" alt="" onClick={nextPage} />
-        </button>
+        </button> */}
       </div>
 
       <div>
-        <Feature/>
+        <Feature />
+      </div>
+
+      <div className="flex align-middle justify-center">
+        <div className=" home-section3 text-center pt-10 uppercase">
+          <h3 className="h3-brand">
+            <span>Ayurvedic Pharmacies In India</span>
+          </h3>
+          <p>Pick our top ayurvedic brands</p>
+        </div>
+      </div>
+
+      <div>
+        <BrandScreen />
+      </div>
+
+      <div className="flex align-middle justify-between m-6">
+        <div className="border-1 rounded-xl shadow-md hover:shadow-lg">
+          <img src="./images/40452.jpg" className="h-[90vh] w-[90hh]" />
+        </div>
+
+        <div className="border-1 rounded-xl shadow-md hover:shadow-lg">
+          <Link to="/shop">
+            <img
+              src="./images/Ashvagandha-3.webp"
+              className="h-[90vh] w-[90hh]"
+            />
+          </Link>
+        </div>
       </div>
     </>
   );
 
-  function perPage() {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  }
+  // function perPage() {
+  //   if (currentPage !== 1) {
+  //     setCurrentPage(currentPage - 1);
+  //   }
+  // }
 
-  function nextPage() {
-    if (currentPage !== npage) {
-      setCurrentPage(currentPage + 1);
-    }
-  }
+  // function nextPage() {
+  //   if (currentPage !== npage) {
+  //     setCurrentPage(currentPage + 1);
+  //   }
+  // }
 }
 export default HomeScreen;

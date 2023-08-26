@@ -10,6 +10,23 @@ productRouter.get('/', async (req, res) => {
   res.send(products);
 });
 
+productRouter.get(
+  '/latestProducts',
+  expressAsyncHandler(async (req, res) => {
+    const products = await Product.find({
+      "createdAt": 
+      {
+          $gte: new Date((new Date().getTime() - (15 * 24 * 60 * 60 * 1000)))
+      }
+  }).sort({"createdAt":-1});
+    const countProducts = await Product.countDocuments();
+    res.send({
+      products,
+      countProducts,
+    });
+  })
+);
+
 productRouter.post(
   '/',
   isAuth,
@@ -227,6 +244,7 @@ productRouter.get('/slug/:slug', async (req, res) => {
     res.status(404).send({ message: 'Product Not Found' });
   }
 });
+
 productRouter.get('/:id', async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -235,5 +253,7 @@ productRouter.get('/:id', async (req, res) => {
     res.status(404).send({ message: 'Product Not Found' });
   }
 });
+
+
 
 export default productRouter;
