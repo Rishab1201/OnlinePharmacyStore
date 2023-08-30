@@ -8,6 +8,7 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { Store } from "../Store";
 import { getError } from "../utils";
+import { Helmet } from "react-helmet-async";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -75,10 +76,10 @@ export const AdminContact = () => {
     if (window.confirm("Are you sure to delete?")) {
       try {
         dispatch({ type: "DELETE_REQUEST" });
-        await axios.delete(`/api/contats/contact/${contact._id}`, {
+        await axios.delete(`/api/contacts/${contact._id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-        toast.success("user deleted successfully");
+        toast.success("Contect deleted successfully");
         dispatch({ type: "DELETE_SUCCESS" });
       } catch (error) {
         toast.error(getError(error));
@@ -89,94 +90,83 @@ export const AdminContact = () => {
     }
   };
   return (
-    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-      <div className="flex align-middle justify-center">
-        <div className=" home-section3 text-center pt-10 uppercase">
-          <h3 className="h3-brand">
-            <span>User Query and Message Log</span>
-          </h3>
+    <>
+      <Helmet>
+        <title>User Queries</title>
+      </Helmet>
+      <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div className="flex align-middle justify-center">
+          <div className=" home-section3 text-center pt-10 uppercase">
+            <h3 className="h3-brand">
+              <span>User Query and Message Log</span>
+            </h3>
+          </div>
         </div>
-      </div>
-      {loadingDelete && <LoadingBox></LoadingBox>}
-      {loading ? (
-        <LoadingBox></LoadingBox>
-      ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
-      ) : (
-        <div className="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
-          {users.map((contact) => (
-            // <tr key={user._id}>
-            //   <td>{user._id}</td>
-            //   <td>{user.name}</td>
-            //   <td>{user.email}</td>
-            //   <td>{user.isAdmin ? 'YES' : 'NO'}</td>
-            //   <td>
-            //     <Button
-            //       type="button"
-            //       variant="light"
-            //       onClick={() => navigate(`/admin/user/${user._id}`)}
-            //     >
-            //       Edit
-            //     </Button>
-            //     &nbsp;
-            //     <Button
-            //       type="button"
-            //       variant="light"
-            //       onClick={() => deleteHandler(user)}
-            //     >
-            //       Delete
-            //     </Button>
-            //   </td>
-            // </tr>
-
-            <div className="p-8 bg-white border rounded shadow-sm">
-              <p className="mb-3 text-xs font-semibold tracking-wide uppercase">
-                <a
-                  href="/"
-                  className="transition-colors duration-200 text-deep-purple-400 hover:text-deep-purple-800 text-lg"
-                  aria-label="Category"
-                >
-                  Date
-                </a>{" "}
-                <span className="text-gray-600 mb-3 text-base">
-                  — {contact.createdAt}
-                </span>
-              </p>
-              <a
-                href="/"
-                aria-label="Article"
-                title={contact.subject}
-                className="inline-block mb-3 text-2xl font-bold leading-5 text-black transition-colors duration-200 first-letter:uppercase font-serif"
+        {loadingDelete && <LoadingBox></LoadingBox>}
+        {loading ? (
+          <LoadingBox></LoadingBox>
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <div className="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
+            {users.map((contact) => (
+              <div
+                className="p-8 bg-white border rounded shadow-sm"
+                key={contact._id}
               >
-                <p className="font-bold">{contact.subject}</p>
-              </a>
-              <p className="mb-5 text-gray-700 font-serif">{contact.message}</p>
-              <div className="flex items-center">
-                <div>
+                <p className="mb-3 text-xs font-semibold tracking-wide uppercase">
                   <a
                     href="/"
-                    aria-label="Author"
-                    title="Author"
-                    className="font-semibold text-gray-800 transition-colors duration-200"
+                    className="transition-colors duration-200 text-deep-purple-400 hover:text-deep-purple-800 text-lg"
+                    aria-label="Category"
                   >
-                    <p className="text-lg font-bold font-serif"> {contact.name}</p>
-                  </a>
+                    Date
+                  </a>{" "}
+                  <span className="text-gray-600 mb-3 text-base">
+                    — {contact.createdAt}
+                  </span>
+                </p>
+                <a
+                  href="/"
+                  aria-label="Article"
+                  title={contact.subject}
+                  className="inline-block mb-3 text-2xl font-bold leading-5 text-black transition-colors duration-200 first-letter:uppercase font-serif"
+                >
+                  <p className="font-bold">{contact.subject}</p>
+                </a>
+                <p className="mb-5 text-gray-700 font-serif">
+                  {contact.message}
+                </p>
+                <div className="flex items-center">
+                  <div>
+                    <a
+                      href="/"
+                      aria-label="Author"
+                      title="Author"
+                      className="font-semibold text-gray-800 transition-colors duration-200"
+                    >
+                      <p className="text-lg font-bold font-serif">
+                        {" "}
+                        {contact.name}
+                      </p>
+                    </a>
+                  </div>
                 </div>
-              </div>
 
-              <Button
-                className="mt-3 focus:outline-none shadow-none bg-earthly-green text-white hover:bg-orange focus:bg-none"
-                type="button"
-                variant="light"
-                onClick={() => deleteHandler(contact)}
-              >
-                Delete
-              </Button>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+                <Button
+                  className="mt-3 focus:outline-none shadow-none bg-earthly-green text-white hover:bg-orange focus:bg-none"
+                  type="button"
+                  variant="light"
+                  onClick={() => deleteHandler(contact)}
+                >
+                  Delete
+                </Button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

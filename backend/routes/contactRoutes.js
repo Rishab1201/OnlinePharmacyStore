@@ -44,5 +44,21 @@ contactRouter.get(
   })
 );
 
+contactRouter.delete(
+  "/:id",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const contact = await Contact.findById(req.params.id);
+    if (contact) {
+      await contact.remove();
+      res.send({ message: "Conatct Deleted" });
+    } else {
+      res.status(404).send({ message: "Contact Not Found" });
+    }
+  })
+);
+
+
 
 export default contactRouter;
