@@ -801,3 +801,109 @@ p {
   filter: invert(1%);
   mix-blend-mode: inherit;
 }
+
+/* ======================== Login ======================== */
+
+.form-container{
+  position: relative;
+  width: 900px;
+  height: 500px;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.form-container:hover{
+  scale: 1.05;
+  /* box-shadow: 0 0 20px rgb(9, 52, 6); */
+  box-shadow: 0 0 20px #075159;
+}
+
+.form-container:hover .form-section{
+  animation: slideIn 0.5s ease-in-out forwards;
+}
+
+.cover{
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* background: rgb(9, 52, 6); */
+  background: #075159;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30px;
+}
+
+.plant-pic{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.form-section{
+  position: absolute;
+  background: white;
+  color: black;
+  z-index: 3;
+  width: 900px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  bottom: -300px;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form-section form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-section form button{
+  width: 100px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  background: rgb(9, 52, 6);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-section form button:hover {
+  background: #038212;
+}
+
+.form-section form input {
+  width: 50%;
+  height: 30px;
+  border: 1px solid rgb(9, 52, 6);
+  border-radius: 5px;
+}
+
+.form-section form input :focus{
+  border: none;
+}
+
+@keyframes slideIn {
+  0% {
+    bottom: -300px;
+  }
+  100% {
+    bottom: 70px;
+  }
+}

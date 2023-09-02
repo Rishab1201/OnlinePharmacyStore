@@ -8,7 +8,7 @@ import MessageBox from "../components/MessageBox";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
-
+// import Chart from "chart.js/auto";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -33,10 +33,9 @@ export default function DashboardScreen() {
   });
   const { state } = useContext(Store);
   const { userInfo } = state;
-  const [latestProducts,setLatestProducts] = useState(0);
-  const [totalUsers,setTotalUsers] = useState([]);
+  const [latestProducts, setLatestProducts] = useState(0);
+  const [totalUsers, setTotalUsers] = useState([]);
   const [totalPurcase, setTotalPurcase] = useState(0);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,13 +54,14 @@ export default function DashboardScreen() {
     fetchData();
   }, [userInfo]);
 
-  useEffect (()=>{
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get("/api/products/latestProducts", {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-        setLatestProducts(data.products.length)
+        setLatestProducts(data.products.length);
+        
       } catch (err) {
         dispatch({
           type: "FETCH_FAIL",
@@ -75,9 +75,8 @@ export default function DashboardScreen() {
         const { data } = await axios.get("/api/users/", {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-        console.log("users",data)
-        
-        setTotalUsers(data)
+        console.log("users", data);
+        setTotalUsers(data);
       } catch (err) {
         dispatch({
           type: "FETCH_FAIL",
@@ -91,9 +90,8 @@ export default function DashboardScreen() {
         const { data } = await axios.get("/api/orders/totalPurchaseOfUser", {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-        console.log("total purchase",data.orders);
+        console.log("total purchase", data.orders);
         setTotalPurcase(data.orders);
-
       } catch (err) {
         dispatch({
           type: "FETCH_FAIL",
@@ -104,8 +102,8 @@ export default function DashboardScreen() {
 
     fetchData();
     fetchUsers();
-    totalPurchaseOfUser()
-  },[])
+    totalPurchaseOfUser();
+  }, []);
 
   return (
     <div>
@@ -216,25 +214,43 @@ export default function DashboardScreen() {
                           </h3>
                         </div>
                       </div>
-                      <div id="main-chart"></div>
+                      <div className="shadow-sm mt-28">
+                        {summary.dailyOrders.length === 0 ? (
+                          <MessageBox>No Sale</MessageBox>
+                        ) : (
+                          <Chart
+                            width="100%"
+                            height="400px"
+                            chartType="AreaChart"
+                            loader={<div>Loading Chart...</div>}
+                            data={[
+                              ["Date", "Sales"],
+                              ...summary.dailyOrders.map((x) => [
+                                x._id,
+                                x.sales,
+                              ]),
+                            ]}
+                          ></Chart>
+                        )}
+                      </div>
                     </div>
                     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                       <div class="mb-4 flex items-center justify-between">
                         <div>
                           <h3 class="text-xl font-bold text-gray-900 mb-2">
-                            Latest Transactions
+                            Latest Users
                           </h3>
                           <span class="text-base font-normal text-gray-500">
-                            This is a list of transactions
+                            This is a list of all Users
                           </span>
                         </div>
                         <div class="flex-shrink-0">
-                          <a
+                          {/* <a
                             href="#"
                             class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2"
                           >
                             View all
-                          </a>
+                          </a> */}
                         </div>
                       </div>
                       <div class="flex flex-col mt-8">
@@ -248,7 +264,13 @@ export default function DashboardScreen() {
                                       scope="col"
                                       class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                     >
-                                      Transaction
+                                      User Name
+                                    </th>
+                                    <th
+                                      scope="col"
+                                      class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >
+                                      Email
                                     </th>
                                     <th
                                       scope="col"
@@ -256,18 +278,11 @@ export default function DashboardScreen() {
                                     >
                                       Date & Time
                                     </th>
-                                    <th
-                                      scope="col"
-                                      class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                    >
-                                      Amount
-                                    </th>
                                   </tr>
                                 </thead>
                                 <tbody class="bg-white">
-                                  <tr>
+                                  {/* <tr>
                                     <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                      Payment from{" "}
                                       <span class="font-semibold">
                                         Bonnie Green
                                       </span>
@@ -275,90 +290,24 @@ export default function DashboardScreen() {
                                     <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
                                       Apr 23 ,2021
                                     </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                      $2300
-                                    </td>
-                                  </tr>
-                                  <tr class="bg-gray-50">
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900 rounded-lg rounded-left">
-                                      Payment refund to{" "}
-                                      <span class="font-semibold">#00910</span>
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                      Apr 23 ,2021
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                      -$670
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                      Payment failed from{" "}
-                                      <span class="font-semibold">#087651</span>
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                      Apr 18 ,2021
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                      $234
-                                    </td>
-                                  </tr>
-                                  <tr class="bg-gray-50">
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900 rounded-lg rounded-left">
-                                      Payment from{" "}
-                                      <span class="font-semibold">
-                                        Lana Byrd
-                                      </span>
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                      Apr 15 ,2021
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                      $5000
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                      Payment from{" "}
-                                      <span class="font-semibold">
-                                        Jese Leos
-                                      </span>
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                      Apr 15 ,2021
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                      $2300
-                                    </td>
-                                  </tr>
-                                  <tr class="bg-gray-50">
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900 rounded-lg rounded-left">
-                                      Payment from{" "}
-                                      <span class="font-semibold">
-                                        THEMESBERG LLC
-                                      </span>
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                      Apr 11 ,2021
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                      $560
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                      Payment from{" "}
-                                      <span class="font-semibold">
-                                        Lana Lysle
-                                      </span>
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                      Apr 6 ,2021
-                                    </td>
-                                    <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                      $1437
-                                    </td>
-                                  </tr>
+                                  </tr> */}
+                                  {totalUsers
+                                    ? totalUsers.map((data) => (
+                                        <tr>
+                                          <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                                            <span class="font-semibold">
+                                              {data.name}
+                                            </span>
+                                          </td>
+                                          <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                                            {data.email}
+                                          </td>
+                                          <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                                            {data.createdAt}
+                                          </td>
+                                        </tr>
+                                      ))
+                                    : null}
                                 </tbody>
                               </table>
                             </div>
@@ -379,7 +328,10 @@ export default function DashboardScreen() {
                           </h3>
                         </div>
                         <div>
-                          <img src="https://img.icons8.com/?size=512&id=8386&format=png" className="w-14"/>
+                          <img
+                            src="https://img.icons8.com/?size=512&id=8386&format=png"
+                            className="w-14"
+                          />
                         </div>
                       </div>
                     </div>
@@ -396,7 +348,10 @@ export default function DashboardScreen() {
                           </h3>
                         </div>
                         <div>
-                          <img src="https://img.icons8.com/?size=512&id=59997&format=png" className="w-14" />
+                          <img
+                            src="https://img.icons8.com/?size=512&id=59997&format=png"
+                            className="w-14"
+                          />
                         </div>
                       </div>
                     </div>
@@ -404,14 +359,17 @@ export default function DashboardScreen() {
                       <div class="flex items-center justify-between">
                         <div class="flex-shrink-0">
                           <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
-                           {totalUsers.length}
+                            {totalUsers.length}
                           </span>
                           <h3 class="text-base font-normal text-gray-500">
                             User signups this week
                           </h3>
                         </div>
                         <div>
-                          <img src="https://img.icons8.com/?size=512&id=ABBSjQJK83zf&format=png" className="w-14" />
+                          <img
+                            src="https://img.icons8.com/?size=512&id=ABBSjQJK83zf&format=png"
+                            className="w-14"
+                          />
                         </div>
                       </div>
                     </div>
@@ -422,204 +380,72 @@ export default function DashboardScreen() {
                         <h3 class="text-xl font-bold leading-none text-gray-900">
                           Latest Customers
                         </h3>
-                        <a
+                        {/* <a
                           href="#"
                           class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg inline-flex items-center p-2"
                         >
                           View all
-                        </a>
+                        </a> */}
                       </div>
                       <div class="flow-root">
                         <ul role="list" class="divide-y divide-gray-200">
-                          {totalPurcase ? totalPurcase.map((data)=><li class="py-3 sm:py-4">
-                            <div class="flex items-center space-x-4">
-                              <div class="flex-shrink-0">
-                                <img
-                                  class="h-8 w-8 rounded-full"
-                                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                                  alt="Neil image"
-                                />
-                              </div>
-                              <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-gray-900 truncate">
-                                  {data.user.name}
-                                </p>
-                                <p class="text-sm text-gray-500 truncate">
-                                  <a
-                                    href="/cdn-cgi/l/email-protection"
-                                    class="__cf_email__"
-                                    data-cfemail="17727a767e7b57607e7973646372653974787a"
-                                  >
-                                    {data.user.email}
-                                  </a>
-                                </p>
-                              </div>
-                              <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                ₹{data.totalOrderPrice}
-                              </div>
-                            </div>
-                          </li>):null}
+                          {totalPurcase
+                            ? totalPurcase.map((data) => (
+                                <li class="py-3 sm:py-4">
+                                  <div class="flex items-center space-x-4">
+                                    <div class="flex-shrink-0">
+                                      <img
+                                        class="h-8 w-8 rounded-full"
+                                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                                        alt="Neil image"
+                                      />
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                      <p class="text-sm font-medium text-gray-900 truncate">
+                                        {data.user.name}
+                                      </p>
+                                      <p class="text-sm text-gray-500 truncate">
+                                        <a
+                                          href="/cdn-cgi/l/email-protection"
+                                          class="__cf_email__"
+                                          data-cfemail="17727a767e7b57607e7973646372653974787a"
+                                        >
+                                          {data.user.email}
+                                        </a>
+                                      </p>
+                                    </div>
+                                    <div class="inline-flex items-center text-base font-semibold text-gray-900">
+                                      ₹{data.totalOrderPrice}
+                                    </div>
+                                  </div>
+                                </li>
+                              ))
+                            : null}
                         </ul>
                       </div>
                     </div>
                     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                       <h3 class="text-xl leading-none font-bold text-gray-900 mb-10">
-                        Acquisition Overview
+                        Total Categories
                       </h3>
                       <div class="block w-full overflow-x-auto">
-                        <table class="items-center w-full bg-transparent border-collapse">
-                          <thead>
-                            <tr>
-                              <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
-                                Top Channels
-                              </th>
-                              <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
-                                Users
-                              </th>
-                              <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px"></th>
-                            </tr>
-                          </thead>
-                          <tbody class="divide-y divide-gray-100">
-                            <tr class="text-gray-500">
-                              <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                                Organic Search
-                              </th>
-                              <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-                                5,649
-                              </td>
-                              <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                <div class="flex items-center">
-                                  <span class="mr-2 text-xs font-medium">
-                                    30%
-                                  </span>
-                                  <div class="relative w-full">
-                                    <div class="w-full bg-gray-200 rounded-sm h-2">
-                                      <div
-                                        class="bg-cyan-600 h-2 rounded-sm"
-                                        style={{ width: "30%" }}
-                                      ></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="text-gray-500">
-                              <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                                Referral
-                              </th>
-                              <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-                                4,025
-                              </td>
-                              <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                <div class="flex items-center">
-                                  <span class="mr-2 text-xs font-medium">
-                                    24%
-                                  </span>
-                                  <div class="relative w-full">
-                                    <div class="w-full bg-gray-200 rounded-sm h-2">
-                                      <div
-                                        class="bg-orange-300 h-2 rounded-sm"
-                                        style={{ width: " 24%" }}
-                                      ></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="text-gray-500">
-                              <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                                Direct
-                              </th>
-                              <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-                                3,105
-                              </td>
-                              <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                <div class="flex items-center">
-                                  <span class="mr-2 text-xs font-medium">
-                                    18%
-                                  </span>
-                                  <div class="relative w-full">
-                                    <div class="w-full bg-gray-200 rounded-sm h-2">
-                                      <div
-                                        class="bg-teal-400 h-2 rounded-sm"
-                                        style={{ width: "18%" }}
-                                      ></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="text-gray-500">
-                              <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                                Social
-                              </th>
-                              <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-                                1251
-                              </td>
-                              <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                <div class="flex items-center">
-                                  <span class="mr-2 text-xs font-medium">
-                                    12%
-                                  </span>
-                                  <div class="relative w-full">
-                                    <div class="w-full bg-gray-200 rounded-sm h-2">
-                                      <div
-                                        class="bg-pink-600 h-2 rounded-sm"
-                                        style={{ width: "12%" }}
-                                      ></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="text-gray-500">
-                              <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-                                Other
-                              </th>
-                              <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-                                734
-                              </td>
-                              <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                                <div class="flex items-center">
-                                  <span class="mr-2 text-xs font-medium">
-                                    9%
-                                  </span>
-                                  <div class="relative w-full">
-                                    <div class="w-full bg-gray-200 rounded-sm h-2">
-                                      <div
-                                        class="bg-indigo-600 h-2 rounded-sm"
-                                        style={{ width: "9%" }}
-                                      ></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="text-gray-500">
-                              <th class="border-t-0 align-middle text-sm font-normal whitespace-nowrap p-4 pb-0 text-left">
-                                Email
-                              </th>
-                              <td class="border-t-0 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4 pb-0">
-                                456
-                              </td>
-                              <td class="border-t-0 align-middle text-xs whitespace-nowrap p-4 pb-0">
-                                <div class="flex items-center">
-                                  <span class="mr-2 text-xs font-medium">
-                                    7%
-                                  </span>
-                                  <div class="relative w-full">
-                                    <div class="w-full bg-gray-200 rounded-sm h-2">
-                                      <div
-                                        class="bg-purple-500 h-2 rounded-sm"
-                                        style={{ width: "7%" }}
-                                      ></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        {summary.productCategories.length === 0 ? (
+                          <MessageBox>No Category</MessageBox>
+                        ) : (
+                          <Chart
+                            width="100%"
+                            height="400px"
+                            chartType="PieChart"
+                            loader={<div>Loading Chart...</div>}
+                            data={[
+                              ["Category", "Products"],
+                              ...summary.productCategories.map((x) => [
+                                x._id,
+                                x.count,
+                              ]),
+                            ]}
+                          ></Chart>
+                        )}
                       </div>
                     </div>
                   </div>

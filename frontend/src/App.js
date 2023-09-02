@@ -111,7 +111,7 @@ function App() {
                       </div>
                       <div>
                         <img
-                          src="https://o.remove.bg/downloads/49900c35-7134-476b-8499-4df10d3ee461/kart2-removebg-preview.png"
+                          src="images/kart2.png"
                           className="w-22 h-16"
                         ></img>
                       </div>
