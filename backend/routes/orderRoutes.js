@@ -82,6 +82,37 @@ orderRouter.get(
 );
 
 orderRouter.get(
+  '/totalPurchaseOfUser',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await User.aggregate([
+      {
+        $lookup: {
+          from: "orders",
+          localField: "_id",
+          foreignField: "user",
+          as: "orders"
+        }
+      },
+      {
+        $unwind: "$orders"
+      },
+      {
+        $group: {
+          _id: "$_id",
+          user: { $first: "$$ROOT" },
+          orders: { $push: "$orders" },
+          totalOrderPrice: { $sum: "$orders.totalPrice" }
+        }
+      }
+    ]);
+    
+    res.send({ orders });
+  })
+);
+
+orderRouter.get(
   '/mine',
   isAuth,
   expressAsyncHandler(async (req, res) => {

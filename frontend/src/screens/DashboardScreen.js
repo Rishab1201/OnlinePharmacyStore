@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import Chart from "react-google-charts";
 import axios from "axios";
 import { Store } from "../Store";
@@ -8,6 +8,7 @@ import MessageBox from "../components/MessageBox";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -32,6 +33,10 @@ export default function DashboardScreen() {
   });
   const { state } = useContext(Store);
   const { userInfo } = state;
+  const [latestProducts,setLatestProducts] = useState(0);
+  const [totalUsers,setTotalUsers] = useState([]);
+  const [totalPurcase, setTotalPurcase] = useState(0);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +54,58 @@ export default function DashboardScreen() {
     };
     fetchData();
   }, [userInfo]);
+
+  useEffect (()=>{
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get("/api/products/latestProducts", {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
+        setLatestProducts(data.products.length)
+      } catch (err) {
+        dispatch({
+          type: "FETCH_FAIL",
+          payload: getError(err),
+        });
+      }
+    };
+
+    const fetchUsers = async () => {
+      try {
+        const { data } = await axios.get("/api/users/", {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
+        console.log("users",data)
+        
+        setTotalUsers(data)
+      } catch (err) {
+        dispatch({
+          type: "FETCH_FAIL",
+          payload: getError(err),
+        });
+      }
+    };
+
+    const totalPurchaseOfUser = async () => {
+      try {
+        const { data } = await axios.get("/api/orders/totalPurchaseOfUser", {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
+        console.log("total purchase",data.orders);
+        setTotalPurcase(data.orders);
+
+      } catch (err) {
+        dispatch({
+          type: "FETCH_FAIL",
+          payload: getError(err),
+        });
+      }
+    };
+
+    fetchData();
+    fetchUsers();
+    totalPurchaseOfUser()
+  },[])
 
   return (
     <div>
@@ -315,7 +372,7 @@ export default function DashboardScreen() {
                       <div class="flex items-center justify-between">
                         <div class="flex-shrink-0">
                           <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
-                            2,340
+                            {latestProducts}
                           </span>
                           <h3 class="text-base font-normal text-gray-500">
                             New products this week
@@ -347,7 +404,7 @@ export default function DashboardScreen() {
                       <div class="flex items-center justify-between">
                         <div class="flex-shrink-0">
                           <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
-                            385
+                           {totalUsers.length}
                           </span>
                           <h3 class="text-base font-normal text-gray-500">
                             User signups this week
@@ -374,7 +431,7 @@ export default function DashboardScreen() {
                       </div>
                       <div class="flow-root">
                         <ul role="list" class="divide-y divide-gray-200">
-                          <li class="py-3 sm:py-4">
+                          {totalPurcase ? totalPurcase.map((data)=><li class="py-3 sm:py-4">
                             <div class="flex items-center space-x-4">
                               <div class="flex-shrink-0">
                                 <img
@@ -385,7 +442,7 @@ export default function DashboardScreen() {
                               </div>
                               <div class="flex-1 min-w-0">
                                 <p class="text-sm font-medium text-gray-900 truncate">
-                                  Neil Sims
+                                  {data.user.name}
                                 </p>
                                 <p class="text-sm text-gray-500 truncate">
                                   <a
@@ -393,127 +450,15 @@ export default function DashboardScreen() {
                                     class="__cf_email__"
                                     data-cfemail="17727a767e7b57607e7973646372653974787a"
                                   >
-                                    [email&#160;protected]
+                                    {data.user.email}
                                   </a>
                                 </p>
                               </div>
                               <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                ₹320
+                                ₹{data.totalOrderPrice}
                               </div>
                             </div>
-                          </li>
-                          <li class="py-3 sm:py-4">
-                            <div class="flex items-center space-x-4">
-                              <div class="flex-shrink-0">
-                                <img
-                                  class="h-8 w-8 rounded-full"
-                                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                                  alt="Neil image"
-                                />
-                              </div>
-                              <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-gray-900 truncate">
-                                  Bonnie Green
-                                </p>
-                                <p class="text-sm text-gray-500 truncate">
-                                  <a
-                                    href="/cdn-cgi/l/email-protection"
-                                    class="__cf_email__"
-                                    data-cfemail="d4b1b9b5bdb894a3bdbab0a7a0b1a6fab7bbb9"
-                                  >
-                                    [email&#160;protected]
-                                  </a>
-                                </p>
-                              </div>
-                              <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                ₹3467
-                              </div>
-                            </div>
-                          </li>
-                          <li class="py-3 sm:py-4">
-                            <div class="flex items-center space-x-4">
-                              <div class="flex-shrink-0">
-                                <img
-                                  class="h-8 w-8 rounded-full"
-                                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                                  alt="Neil image"
-                                />
-                              </div>
-                              <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-gray-900 truncate">
-                                  Michael Gough
-                                </p>
-                                <p class="text-sm text-gray-500 truncate">
-                                  <a
-                                    href="/cdn-cgi/l/email-protection"
-                                    class="__cf_email__"
-                                    data-cfemail="57323a363e3b17203e3933242332257934383a"
-                                  >
-                                    [email&#160;protected]
-                                  </a>
-                                </p>
-                              </div>
-                              <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                ₹67
-                              </div>
-                            </div>
-                          </li>
-                          <li class="py-3 sm:py-4">
-                            <div class="flex items-center space-x-4">
-                              <div class="flex-shrink-0">
-                                <img
-                                  class="h-8 w-8 rounded-full"
-                                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                                  alt="Neil image"
-                                />
-                              </div>
-                              <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-gray-900 truncate">
-                                  Thomes Lean
-                                </p>
-                                <p class="text-sm text-gray-500 truncate">
-                                  <a
-                                    href="/cdn-cgi/l/email-protection"
-                                    class="__cf_email__"
-                                    data-cfemail="284d45494144685f41464c5b5c4d5a064b4745"
-                                  >
-                                    [email&#160;protected]
-                                  </a>
-                                </p>
-                              </div>
-                              <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                ₹2367
-                              </div>
-                            </div>
-                          </li>
-                          <li class="pt-3 sm:pt-4 pb-0">
-                            <div class="flex items-center space-x-4">
-                              <div class="flex-shrink-0">
-                                <img
-                                  class="h-8 w-8 rounded-full"
-                                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                                  alt="Neil image"
-                                />
-                              </div>
-                              <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-gray-900 truncate">
-                                  Lana Byrd
-                                </p>
-                                <p class="text-sm text-gray-500 truncate">
-                                  <a
-                                    href="/cdn-cgi/l/email-protection"
-                                    class="__cf_email__"
-                                    data-cfemail="a2c7cfc3cbcee2d5cbccc6d1d6c7d08cc1cdcf"
-                                  >
-                                    [email&#160;protected]
-                                  </a>
-                                </p>
-                              </div>
-                              <div class="inline-flex items-center text-base font-semibold text-gray-900">
-                                ₹367
-                              </div>
-                            </div>
-                          </li>
+                          </li>):null}
                         </ul>
                       </div>
                     </div>
