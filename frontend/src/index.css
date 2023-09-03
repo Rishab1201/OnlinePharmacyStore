@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --orange: rbg(255, 165, 0);
   --earthly-green: #075159;
@@ -19,11 +18,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   width: 10px;
 }
 
-body::-webkit-scrollbar-track{
+body::-webkit-scrollbar-track {
   border: none;
   background: transparent;
 }
@@ -39,11 +38,11 @@ body::-webkit-scrollbar-thumb:hover {
 
 /* ============================ Side Bar =============================== */
 
-.sidebar-scroll::-webkit-scrollbar{
+.sidebar-scroll::-webkit-scrollbar {
   width: 10px;
 }
 
-.sidebar-scroll::-webkit-scrollbar-track{
+.sidebar-scroll::-webkit-scrollbar-track {
   border: none;
   background: transparent;
 }
@@ -52,7 +51,6 @@ body::-webkit-scrollbar-thumb:hover {
   background: #a0a0a0;
   border-radius: 10px;
 }
-
 
 .site-container {
   min-height: 100vh;
@@ -472,7 +470,7 @@ p {
   position: relative;
 }
 
-.home-section1 .h3{
+.home-section1 .h3 {
   font-size: 25px;
   font-weight: 700;
   margin: 0 0 10px;
@@ -599,7 +597,6 @@ p {
   grid-template-columns: auto auto auto auto;
   grid-row-gap: 110px;
   grid-column-gap: 50px;
-
 }
 
 /* Home section 3 */
@@ -609,7 +606,7 @@ p {
   width: 600px;
 }
 
-.home-section3 .h3-brand{
+.home-section3 .h3-brand {
   font-size: 25px;
   font-weight: 700;
   margin: 0 0 10px;
@@ -648,8 +645,6 @@ p {
   margin-bottom: 20px;
   color: #8d8d8d;
 }
-
-
 
 /* ShopScreen Pagination */
 
@@ -796,9 +791,7 @@ p {
   color: orange;
 }
 
-
 /* BRAND CONTAINER */
-
 
 .brand-div {
   width: 206px;
@@ -808,21 +801,20 @@ p {
   justify-content: center;
 }
 
-.brand-div:hover{
+.brand-div:hover {
   cursor: pointer;
 }
 
-
 /*  Dicount Image  */
 
-.image{
+.image {
   filter: invert(1%);
   mix-blend-mode: inherit;
 }
 
 /* ======================== Login ======================== */
 
-.form-container{
+.form-container {
   position: relative;
   width: 900px;
   height: 500px;
@@ -834,17 +826,17 @@ p {
   color: white;
 }
 
-.form-container:hover{
+.form-container:hover {
   scale: 1.05;
   /* box-shadow: 0 0 20px rgb(9, 52, 6); */
   box-shadow: 0 0 20px #075159;
 }
 
-.form-container:hover .form-section{
+.form-container:hover .form-section {
   animation: slideIn 0.5s ease-in-out forwards;
 }
 
-.cover{
+.cover {
   width: 100%;
   height: 100%;
   border-radius: 15px;
@@ -859,14 +851,14 @@ p {
   font-size: 30px;
 }
 
-.plant-pic{
+.plant-pic {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.form-section{
+.form-section {
   position: absolute;
   background: white;
   color: black;
@@ -891,7 +883,7 @@ p {
   align-items: center;
 }
 
-.form-section form button{
+.form-section form button {
   width: 100px;
   height: 30px;
   border: none;
@@ -913,7 +905,7 @@ p {
   border-radius: 5px;
 }
 
-.form-section form input :focus{
+.form-section form input :focus {
   border: none;
 }
 
@@ -925,3 +917,62 @@ p {
     bottom: 70px;
   }
 }
+
+/* Cart  */
+
+.empty-cart {
+  width: 40vw;
+  height: 65vh;
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Maison Neue";
+  font-weight: 300;
+}
+/* .empty-cart
+  width: 50vw;
+  margin:0 auto;
+  text-align center
+  font-family 'Maison Neue'
+  font-weight 300
+
+svg
+  max-width 60%
+  padding 5rem 3rem
+  
+  #oval, #plus, #diamond, #bubble-rounded
+    animation plopp 4s ease-out infinite
+    
+    for i in (1..16)
+      &:nth-child({i})
+        animation-delay:-240ms  ;
+  
+  #bg-line
+    &:nth-child(2)
+      fill-opacity .
+    &:nth-child(3)
+      fill-opacity .
+  
+@keyframes plopp
+  0%
+    transform translate(0, 0)
+    opacity 1
+  100%
+    transform translate(0, -10px)
+    opacity 0
+    
+h3
+  font-size 2rem
+  line-height 2rem
+  margin 0
+  padding 0
+  font-weight 600
+  
+p
+  color rgba(0,0,0,0.5)
+  font-size 18px
+  line-height 24px
+  max-width 80%
+  margin 1.25rem auto 0 auto
+  
+body
+  background #f2f2f2 */

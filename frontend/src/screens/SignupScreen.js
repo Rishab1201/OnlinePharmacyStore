@@ -504,7 +504,7 @@ export default function SignupScreen() {
               </div>
               <div>
                 <div className="flex -mx-3">
-                  <div className="w-1/2 px-3 mb-5">
+                  <div className="w-full px-3 mb-5">
                     <label htmlFor className="text-xs font-semibold px-1">
                       First name
                     </label>
@@ -515,25 +515,12 @@ export default function SignupScreen() {
                       <input
                         type="text"
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                        placeholder="John"
+                        placeholder="John smith"
+                        onChange={(e) => setName(e.target.value)}
                       />
                     </div>
                   </div>
-                  <div className="w-1/2 px-3 mb-5">
-                    <label htmlFor className="text-xs font-semibold px-1">
-                      Last name
-                    </label>
-                    <div className="flex">
-                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                        <i className="mdi mdi-account-outline text-gray-400 text-lg" />
-                      </div>
-                      <input
-                        type="text"
-                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                        placeholder="Smith"
-                      />
-                    </div>
-                  </div>
+                  
                 </div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
@@ -548,6 +535,8 @@ export default function SignupScreen() {
                         type="email"
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder="johnsmith@example.com"
+                        onChange={(e) => setEmail(e.target.value)}
+                        
                       />
                     </div>
                   </div>
@@ -565,6 +554,8 @@ export default function SignupScreen() {
                         type="password"
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder="************"
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
                       />
                     </div>
                   </div>
@@ -582,13 +573,26 @@ export default function SignupScreen() {
                         type="text"
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                         placeholder="************"
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
                       />
                     </div>
                   </div>
                 </div>
+                <p class="text-sm font-light text-black dark:text-gray-700 pb-3">
+                  Already have an account?{" "}
+                  <Link to={`/signin?redirect=${redirect}`}>
+                    <span className="font-bold text-blue-400 hover:text-blue-200">
+                      Sign-In
+                    </span>
+                  </Link>
+                </p>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
-                    <button className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
+                    <button
+                      className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                      onClick={submitHandler}
+                    >
                       REGISTER NOW
                     </button>
                   </div>
