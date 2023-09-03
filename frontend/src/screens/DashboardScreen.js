@@ -303,7 +303,7 @@ export default function DashboardScreen() {
                                             {data.email}
                                           </td>
                                           <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                            {data.createdAt}
+                                            {data.createdAt.substring(0, 10)}
                                           </td>
                                         </tr>
                                       ))
