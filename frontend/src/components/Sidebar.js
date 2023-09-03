@@ -6,7 +6,7 @@ function Sidebar({ categories, setSidebarIsOpen, userInfo }) {
 
   return (
     <>
-      <div className="flex overflow-hidden bg-white rounded-lg h-screen z-20 sticky top-0">
+      <div className="flex overflow-hidden bg-white rounded-lg h-screen z-20 sticky top-0 scroll-m-0">
         <div className="hidden md:flex md:flex-shrink-0">
           <div className="flex flex-col w-64">
             <div className="flex flex-col flex-grow pt-5 overflow-y-auto border-2 rounded-lg bg-stone-900 ">
@@ -35,7 +35,7 @@ function Sidebar({ categories, setSidebarIsOpen, userInfo }) {
                   </svg>
                 </button>
               </div>
-              <div className="flex flex-col flex-grow px-4 mt-5">
+              <div className="sidebar-scroll flex flex-col flex-grow px-4 mt-2 mb-2 overflow-y-scroll">
                 <nav className="flex-1 space-y-1 bg-stone-900 ">
                   <ul>
                     {categories.map((category) => (
