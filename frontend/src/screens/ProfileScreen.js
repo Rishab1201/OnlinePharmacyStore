@@ -1,19 +1,19 @@
-import React, { useContext, useReducer, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import { Store } from '../Store';
-import { toast } from 'react-toastify';
-import { getError } from '../utils';
-import axios from 'axios';
+import React, { useContext, useReducer, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { Store } from "../Store";
+import { toast } from "react-toastify";
+import { getError } from "../utils";
+import axios from "axios";
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'UPDATE_REQUEST':
+    case "UPDATE_REQUEST":
       return { ...state, loadingUpdate: true };
-    case 'UPDATE_SUCCESS':
+    case "UPDATE_SUCCESS":
       return { ...state, loadingUpdate: false };
-    case 'UPDATE_FAIL':
+    case "UPDATE_FAIL":
       return { ...state, loadingUpdate: false };
 
     default:
@@ -26,8 +26,8 @@ export default function ProfileScreen() {
   const { userInfo } = state;
   const [name, setName] = useState(userInfo.name);
   const [email, setEmail] = useState(userInfo.email);
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
     loadingUpdate: false,
@@ -37,7 +37,7 @@ export default function ProfileScreen() {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        '/api/users/profile',
+        "/api/users/profile",
         {
           name,
           email,
@@ -48,14 +48,14 @@ export default function ProfileScreen() {
         }
       );
       dispatch({
-        type: 'UPDATE_SUCCESS',
+        type: "UPDATE_SUCCESS",
       });
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      toast.success('User updated successfully');
+      ctxDispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      toast.success("User updated successfully");
     } catch (err) {
       dispatch({
-        type: 'FETCH_FAIL',
+        type: "FETCH_FAIL",
       });
       toast.error(getError(err));
     }
@@ -66,37 +66,41 @@ export default function ProfileScreen() {
       <Helmet>
         <title>User Profile</title>
       </Helmet>
-      <h1 className="my-3">User Profile</h1>
-      <form onSubmit={submitHandler}>
+      <h1 className="my-3 font-bold text-3xl pt-6 font-serif">User Profile</h1>
+      <form onSubmit={submitHandler} className="border shadow-sm mt-10 mb-10 p-6 rounded-lg">
         <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Name</Form.Label>
+          <Form.Label className="font-semibold">Name</Form.Label>
           <Form.Control
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            className="border shadow"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Email</Form.Label>
+          <Form.Label className="font-semibold">Email</Form.Label>
           <Form.Control
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            className="border shadow"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label className="font-semibold">Password</Form.Label>
           <Form.Control
             type="password"
             onChange={(e) => setPassword(e.target.value)}
+            className="border shadow"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label className="font-semibold">Confirm Password</Form.Label>
           <Form.Control
             type="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
+            className="border shadow"
           />
         </Form.Group>
         <div className="mb-3">

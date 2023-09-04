@@ -1,9 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { Store } from "../Store";
 import { getError } from "../utils";
@@ -13,6 +8,8 @@ import Link from "react-dom";
 import { Line } from "react-chartjs-2";
 import { Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto";
+// import {BallTriangle } from 'react-loader-spinner';
+import { BeatLoader } from "react-spinners";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -206,11 +203,11 @@ export default function DashboardScreen() {
 
   return (
     <div>
-      <div className="w-full bg-slate-100 shadow-sm h-20 text-center mt-5 mb-5 ml-2">
+      {/* <div className="w-full bg-slate-100 shadow-sm h-20 text-center mt-5 mb-5 ml-2">
         <h1 className="text-cyan-600 text-4xl uppercase font-serif font-bold pt-4">
           Dashboard
         </h1>
-      </div>
+      </div> */}
 
       {loading ? (
         <LoadingBox />
