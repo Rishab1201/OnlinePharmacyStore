@@ -111,7 +111,7 @@ function App() {
                       </div>
                       <div>
                         <img
-                          src="images/kart2.png"
+                          src="/images/cartImage.png"
                           className="w-22 h-16"
                         ></img>
                       </div>

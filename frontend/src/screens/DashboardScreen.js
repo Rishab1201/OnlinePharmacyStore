@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 // import Chart from "chart.js/auto";
+import Link from "react-dom";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -31,6 +32,8 @@ export default function DashboardScreen() {
     loading: true,
     error: "",
   });
+
+  console.log("Summary",summary);
   const { state } = useContext(Store);
   const { userInfo } = state;
   const [latestProducts, setLatestProducts] = useState(0);
@@ -112,11 +115,12 @@ export default function DashboardScreen() {
           Dashboard
         </h1>
       </div>
+
       {loading ? (
         <LoadingBox />
-      ) : error ? (
+      ) :  error ? (
         <MessageBox variant="danger">{error}</MessageBox>
-      ) : (
+      ) :(
         <>
           {/* <Row>
             <Col md={4}>
@@ -205,8 +209,8 @@ export default function DashboardScreen() {
                         <div class="flex-shrink-0">
                           <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
                             ₹
-                            {summary.orders && summary.users[0]
-                              ? summary.orders[0].totalSales.toFixed(2)
+                            {summary.orders.length >0 && summary.users[0]
+                              ? summary.orders[0]?.totalSales.toFixed(2)
                               : 0}
                           </span>
                           <h3 class="text-base font-normal text-gray-500">
@@ -225,7 +229,7 @@ export default function DashboardScreen() {
                             loader={<div>Loading Chart...</div>}
                             data={[
                               ["Date", "Sales"],
-                              ...summary.dailyOrders.map((x) => [
+                              ...summary?.dailyOrders.map((x) => [
                                 x._id,
                                 x.sales,
                               ]),
@@ -276,7 +280,13 @@ export default function DashboardScreen() {
                                       scope="col"
                                       class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                     >
-                                      Date & Time
+                                      Date
+                                    </th>
+                                    <th
+                                      scope="col"
+                                      class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >
+                                      Time
                                     </th>
                                   </tr>
                                 </thead>
@@ -305,6 +315,9 @@ export default function DashboardScreen() {
                                           <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
                                             {data.createdAt.substring(0, 10)}
                                           </td>
+                                          <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                                            {data.createdAt.substring(11, 16)}
+                                          </td>
                                         </tr>
                                       ))
                                     : null}
@@ -316,7 +329,7 @@ export default function DashboardScreen() {
                       </div>
                     </div>
                   </div>
-                  <div class="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                  <div class={`mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-${summary.orders.length >0 ?3:2} gap-4`}>
                     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                       <div class="flex items-center justify-between">
                         <div class="flex-shrink-0">
@@ -335,12 +348,12 @@ export default function DashboardScreen() {
                         </div>
                       </div>
                     </div>
-                    <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+                    {summary.orders.length >0 ?<div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
                       <div class="flex items-center justify-between">
                         <div class="flex-shrink-0">
                           <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
-                            {summary.orders && summary.users[0]
-                              ? summary.orders[0].numOrders
+                            {summary?.orders && summary?.users[0]
+                              ? summary?.orders[0]?.numOrders
                               : 0}
                           </span>
                           <h3 class="text-base font-normal text-gray-500">
@@ -354,8 +367,8 @@ export default function DashboardScreen() {
                           />
                         </div>
                       </div>
-                    </div>
-                    <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+                    </div>:null}
+                    <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
                       <div class="flex items-center justify-between">
                         <div class="flex-shrink-0">
                           <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">
@@ -389,7 +402,7 @@ export default function DashboardScreen() {
                       </div>
                       <div class="flow-root">
                         <ul role="list" class="divide-y divide-gray-200">
-                          {totalPurcase
+                          {totalPurcase.length > 0
                             ? totalPurcase.map((data) => (
                                 <li class="py-3 sm:py-4">
                                   <div class="flex items-center space-x-4">
@@ -420,7 +433,7 @@ export default function DashboardScreen() {
                                   </div>
                                 </li>
                               ))
-                            : null}
+                            : <p>No Sales</p>}
                         </ul>
                       </div>
                     </div>

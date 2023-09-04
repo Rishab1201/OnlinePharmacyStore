@@ -11,7 +11,7 @@ export const Footer = () => {
               className="inline-flex items-center"
             >
               {/* Image */}
-              <img src="images/kart2.png" className="w-12"></img>
+              <img src="/images/cartImage.png" className="w-12"></img>
 
               <span className="ml-2 text-xl font-bold tracking-wide text-gray-300 uppercase">
                 AyurVedaMart
