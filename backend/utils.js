@@ -50,11 +50,12 @@ export const mailgun = () =>
 
 export const sendEmail = async (order) => {
   const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
+    // host: 'smtp.ethereal.email',
+    // port: 587,
+    service : 'gmail',
     auth: {
-      user: "emory.medhurst@ethereal.email", // Your Gmail email address
-      pass: "FeTapxKvXBZpwZxp5V", // Your Gmail password (Consider using environment variables)
+      user: process.env.EMAIL, // Your Gmail email address
+      pass: process.env.PASSWORD, // Your Gmail password (Consider using environment variables)
     },
   });
 
@@ -93,7 +94,7 @@ export const payOrderEmailTemplate = (order) => {
     <tr>
     <td>${item.name}</td>
     <td align="center">${item.quantity}</td>
-    <td align="right"> $${item.price.toFixed(2)}</td>
+    <td align="right"> ₹${item.price.toFixed(2)}</td>
     </tr>
   `
     )
@@ -102,15 +103,15 @@ export const payOrderEmailTemplate = (order) => {
   <tfoot>
   <tr>
   <td colspan="2">Items Price:</td>
-  <td align="right"> $${order.itemsPrice.toFixed(2)}</td>
+  <td align="right"> ₹${order.itemsPrice.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2">Shipping Price:</td>
-  <td align="right"> $${order.shippingPrice.toFixed(2)}</td>
+  <td align="right"> ₹${order.shippingPrice.toFixed(2)}</td>
   </tr>
   <tr>
   <td colspan="2"><strong>Total Price:</strong></td>
-  <td align="right"><strong> $${order.totalPrice.toFixed(2)}</strong></td>
+  <td align="right"><strong> ₹${order.totalPrice.toFixed(2)}</strong></td>
   </tr>
   <tr>
   <td colspan="2">Payment Method:</td>
