@@ -1,5 +1,6 @@
-import jwt from 'jsonwebtoken';
-import mg from 'mailgun-js';
+import jwt from "jsonwebtoken";
+import mg from "mailgun-js";
+import nodemailer from "nodemailer";
 
 export const generateToken = (user) => {
   return jwt.sign(
@@ -11,7 +12,7 @@ export const generateToken = (user) => {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: '30d',
+      expiresIn: "30d",
     }
   );
 };
@@ -22,14 +23,14 @@ export const isAuth = (req, res, next) => {
     const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
     jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
-        res.status(401).send({ message: 'Invalid Token' });
+        res.status(401).send({ message: "Invalid Token" });
       } else {
         req.user = decode;
         next();
       }
     });
   } else {
-    res.status(401).send({ message: 'No Token' });
+    res.status(401).send({ message: "No Token" });
   }
 };
 
@@ -37,7 +38,7 @@ export const isAdmin = (req, res, next) => {
   if (req.user && req.user.isAdmin) {
     next();
   } else {
-    res.status(401).send({ message: 'Invalid Admin Token' });
+    res.status(401).send({ message: "Invalid Admin Token" });
   }
 };
 
@@ -46,6 +47,31 @@ export const mailgun = () =>
     apiKey: process.env.MAILGUN_API_KEY,
     domain: process.env.MAILGUN_DOMIAN,
   });
+
+export const sendEmail = async (order) => {
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    auth: {
+      user: "emory.medhurst@ethereal.email", // Your Gmail email address
+      pass: "FeTapxKvXBZpwZxp5V", // Your Gmail password (Consider using environment variables)
+    },
+  });
+
+  const mailOptions = {
+    from: "AyurVedaMart <ayurvedamart45@gmail.com>", // Sender's name and email address
+    to: `${order.user.name} <${order.user.email}>`, // Recipient's email address
+    subject: `New order ${order._id}`,
+    html: payOrderEmailTemplate(order),
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Email sent:", info.response);
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
+};
 
 export const payOrderEmailTemplate = (order) => {
   return `<h1>Thanks for shopping with us</h1>
@@ -71,7 +97,7 @@ export const payOrderEmailTemplate = (order) => {
     </tr>
   `
     )
-    .join('\n')}
+    .join("\n")}
   </tbody>
   <tfoot>
   <tr>

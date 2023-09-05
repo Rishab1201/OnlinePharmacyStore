@@ -207,11 +207,14 @@ export default function ShippingAddressScreen() {
                         </div>
                         <div className="col-md-6">
                           <div className="form-group mb-3">
-                            <label>State</label>
+                            <label>Country</label>
                             <input
                               type="text"
                               name="State"
                               className="form-control focus:border-none shadow-none"
+                              value={country}
+                              onChange={(e) => setCountry(e.target.value)}
+                              required
                             />
                           </div>
                         </div>
