@@ -5,6 +5,8 @@ import Rating from "./Rating";
 import axios from "axios";
 import { useContext } from "react";
 import { Store } from "../Store";
+// import { Toast } from "bootstrap";
+import { toast } from "react-toastify";
 
 function Product(props) {
   const { product } = props;
@@ -26,6 +28,7 @@ function Product(props) {
       type: "CART_ADD_ITEM",
       payload: { ...item, quantity },
     });
+    toast.success("Great choice! Your item is now in the cart.");
   };
 
   return (

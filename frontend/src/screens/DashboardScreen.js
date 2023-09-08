@@ -4,12 +4,12 @@ import { Store } from "../Store";
 import { getError } from "../utils";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import Link from "react-dom";
+// import Link from "react-dom";
 import { Line } from "react-chartjs-2";
 import { Pie } from "react-chartjs-2";
-import Chart from "chart.js/auto";
+// import Chart from "chart.js/auto";
 // import {BallTriangle } from 'react-loader-spinner';
-import { BeatLoader } from "react-spinners";
+// import { BeatLoader } from "react-spinners";
 
 const reducer = (state, action) => {
   switch (action.type) {

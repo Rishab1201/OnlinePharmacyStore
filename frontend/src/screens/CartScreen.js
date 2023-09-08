@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function CartScreen() {
   const navigate = useNavigate();
@@ -30,8 +31,10 @@ export default function CartScreen() {
   };
   const removeItemHandler = (item) => {
     ctxDispatch({ type: "CART_REMOVE_ITEM", payload: item });
+    toast.error("Item removed. Your cart is now updated.");
   };
 
+  
   const checkoutHandler = () => {
     navigate("/signin?redirect=/shipping");
   };

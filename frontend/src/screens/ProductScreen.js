@@ -84,6 +84,7 @@ function ProductScreen() {
       payload: { ...product, quantity },
     });
     navigate("/cart");
+    toast.success("Item Added to cart");
   };
 
   const submitHandler = async (e) => {
@@ -123,159 +124,6 @@ function ProductScreen() {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    // <div>
-    //   <Row>
-    //     <Col md={6}>
-    //       <img
-    //         className="img-large"
-    //         src={selectedImage || product.image}
-    //         alt={product.name}
-    //       ></img>
-    //     </Col>
-    //     <Col md={3}>
-    //       <ListGroup variant="flush">
-    //         <ListGroup.Item>
-    //           <Helmet>
-    //             <title>{product.name}</title>
-    //           </Helmet>
-    //           <h1>{product.name}</h1>
-    //         </ListGroup.Item>
-    //         <ListGroup.Item>
-    //           <Rating
-    //             rating={product.rating}
-    //             numReviews={product.numReviews}
-    //           ></Rating>
-    //         </ListGroup.Item>
-    //         <ListGroup.Item>Pirce : ${product.price}</ListGroup.Item>
-    //         <ListGroup.Item>
-    //           <Row xs={1} md={2} className="g-2">
-    //             {[product.image, ...product.images].map((x) => (
-    //               <Col key={x}>
-    //                 <Card>
-    //                   <Button
-    //                     className="thumbnail"
-    //                     type="button"
-    //                     variant="light"
-    //                     onClick={() => setSelectedImage(x)}
-    //                   >
-    //                     <Card.Img variant="top" src={x} alt="product" />
-    //                   </Button>
-    //                 </Card>
-    //               </Col>
-    //             ))}
-    //           </Row>
-    //         </ListGroup.Item>
-    //         <ListGroup.Item>
-    //           Description:
-    //           <p>{product.description}</p>
-    //         </ListGroup.Item>
-    //       </ListGroup>
-    //     </Col>
-    //     <Col md={3}>
-    //       <Card>
-    //         <Card.Body>
-    //           <ListGroup variant="flush">
-    //             <ListGroup.Item>
-    //               <Row>
-    //                 <Col>Price:</Col>
-    //                 <Col>${product.price}</Col>
-    //               </Row>
-    //             </ListGroup.Item>
-    //             <ListGroup.Item>
-    //               <Row>
-    //                 <Col>Status:</Col>
-    //                 <Col>
-    //                   {product.countInStock > 0 ? (
-    //                     <Badge bg="success">In Stock</Badge>
-    //                   ) : (
-    //                     <Badge bg="danger">Unavailable</Badge>
-    //                   )}
-    //                 </Col>
-    //               </Row>
-    //             </ListGroup.Item>
-
-    //             {product.countInStock > 0 && (
-    //               <ListGroup.Item>
-    //                 <div className="d-grid">
-    //                   <Button onClick={addToCartHandler} variant="primary">
-    //                     Add to Cart
-    //                   </Button>
-    //                 </div>
-    //               </ListGroup.Item>
-    //             )}
-    //           </ListGroup>
-    //         </Card.Body>
-    //       </Card>
-    //     </Col>
-    //   </Row>
-    //   <div className="my-3">
-    //     <h2 ref={reviewsRef}>Reviews</h2>
-    //     <div className="mb-3">
-    //       {product.reviews.length === 0 && (
-    //         <MessageBox>There is no review</MessageBox>
-    //       )}
-    //     </div>
-    //     <ListGroup>
-    //       {product.reviews.map((review) => (
-    //         <ListGroup.Item key={review._id}>
-    //           <strong>{review.name}</strong>
-    //           <Rating rating={review.rating} caption=" "></Rating>
-    //           <p>{review.createdAt.substring(0, 10)}</p>
-    //           <p>{review.comment}</p>
-    //         </ListGroup.Item>
-    //       ))}
-    //     </ListGroup>
-    //     <div className="my-3">
-    //       {userInfo ? (
-    //         <form onSubmit={submitHandler}>
-    //           <h2>Write a customer review</h2>
-    //           <Form.Group className="mb-3" controlId="rating">
-    //             <Form.Label>Rating</Form.Label>
-    //             <Form.Select
-    //               aria-label="Rating"
-    //               value={rating}
-    //               onChange={(e) => setRating(e.target.value)}
-    //             >
-    //               <option value="">Select...</option>
-    //               <option value="1">1- Poor</option>
-    //               <option value="2">2- Fair</option>
-    //               <option value="3">3- Good</option>
-    //               <option value="4">4- Very good</option>
-    //               <option value="5">5- Excelent</option>
-    //             </Form.Select>
-    //           </Form.Group>
-    //           <FloatingLabel
-    //             controlId="floatingTextarea"
-    //             label="Comments"
-    //             className="mb-3"
-    //           >
-    //             <Form.Control
-    //               as="textarea"
-    //               placeholder="Leave a comment here"
-    //               value={comment}
-    //               onChange={(e) => setComment(e.target.value)}
-    //             />
-    //           </FloatingLabel>
-
-    //           <div className="mb-3">
-    //             <Button disabled={loadingCreateReview} type="submit">
-    //               Submit
-    //             </Button>
-    //             {loadingCreateReview && <LoadingBox></LoadingBox>}
-    //           </div>
-    //         </form>
-    //       ) : (
-    //         <MessageBox>
-    //           Please{' '}
-    //           <Link to={`/signin?redirect=/product/${product.slug}`}>
-    //             Sign In
-    //           </Link>{' '}
-    //           to write a review
-    //         </MessageBox>
-    //       )}
-    //     </div>
-    //   </div>
-    // </div>
     <>
       <section className="overflow-hidden text-gray-600 body-font">
         <div className="container px-5 py-4 mx-auto">
@@ -318,6 +166,7 @@ function ProductScreen() {
                   <button
                     className="flex px-6 py-2 ml-auto text-white border-0 border-earthly-green bg-earthly-green rounded focus:outline-none hover:bg-orange"
                     onClick={addToCartHandler}
+                    
                   >
                     Add to Cart
                   </button>
@@ -345,58 +194,65 @@ function ProductScreen() {
                 )}
               </div>
               <div className="flex mx-auto mt-6">
-                <span className="inline-block w-40 h-1 bg-blue-500 rounded-full"></span>
+                <span className="inline-block w-80 h-1 bg-blue-500 rounded-full"></span>
                 <span className="inline-block w-3 h-1 mx-1 bg-blue-500 rounded-full"></span>
                 <span className="inline-block w-1 h-1 bg-blue-500 rounded-full"></span>
               </div>
             </div>
           </div>
 
-          <section className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 lg:grid-cols-2 xl:grid-cols-3">
+          {/* <section className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 lg:grid-cols-2 xl:grid-cols-3"> */}
+          <div class="grid gap-6 text-center md:grid-cols-3 lg:gap-12">
             {product.reviews.map((reviews, index) => (
-              <div
-                className="p-8 border rounded-lg dark:border-gray-700"
-                key={reviews._id}
-              >
-                <p className="leading-loose text-gray-500 dark:text-gray-400">
-                  “{reviews.comment}”.
-                </p>
-
-                <div className="flex items-center mt-8 -mx-2">
+              <div class="mb-12 md:mb-0 pt-6" key={reviews._id}>
+                <div class="mb-6 flex justify-center text-center">
                   <img
-                    className="object-cover mx-2 rounded-full w-14 shrink-0 h-14 ring-4 ring-gray-300 dark:ring-gray-700"
-                    src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-                    alt=""
+                    src="/images/blank-profile.png"
+                    class="w-32 rounded-full shadow-lg dark:shadow-black/30"
                   />
-
-                  <div className="mx-2">
-                    <h1 className="font-bold text-gray-800 capitalize dark:text-white">
-                      {reviews.name}
-                    </h1>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      <Rating
-                        rating={reviews.rating}
-                        caption=" "
-                        className="inline"
-                      />
-                      <p className="text-[12px] inline">
-                        {reviews.createdAt.substring(0, 10)}
-                      </p>
-                    </span>
-                  </div>
                 </div>
+                <h5 class="mb-4 text-xl font-semibold">{reviews.name}</h5>
+                <p class="mb-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    class="inline-block h-7 w-7 pr-2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                  </svg>
+                  {reviews.comment}.
+                </p>
+                <span className="text-sm text-gray-500 dark:text-gray-400">
+                  <Rating
+                    rating={reviews.rating}
+                    caption=" "
+                    className="inline"
+                  />
+                  <p className="text-[12px] inline">
+                    {reviews.createdAt.substring(0, 10)}
+                  </p>
+                </span>
               </div>
             ))}
-          </section>
+            {/* </section> */}
+          </div>
         </div>
       </section>
 
-      <div className="my-3">
+      <div className="my-6">
         {userInfo ? (
-          <form onSubmit={submitHandler}>
-            <h2>Write a customer review</h2>
+          <form
+            onSubmit={submitHandler}
+            className="w-[50%] border-1 p-4 rounded-md shadow-md hover:shadow-lg transition-all translate-x-1 ml-6"
+          >
+            <h2 className="text-lg font-semibold mb-3">
+              Write a customer review
+            </h2>
             <Form.Group className="mb-3" controlId="rating">
-              <Form.Label>Rating</Form.Label>
+              <Form.Label className="text-base font-semibold">
+                Rating
+              </Form.Label>
               <Form.Select
                 aria-label="Rating"
                 value={rating}
@@ -404,32 +260,33 @@ function ProductScreen() {
                 className="form-select "
               >
                 <option value="">Select...</option>
-                <option value="1">1- Poor</option>
-                <option value="2">2- Fair</option>
-                <option value="3">3- Good</option>
-                <option value="4">4- Very good</option>
-                <option value="5">5- Excelent</option>
+                <option value="1">1- Poor ⭐</option>
+                <option value="2">2- Fair ⭐⭐</option>
+                <option value="3">3- Good ⭐⭐⭐</option>
+                <option value="4">4- Very good ⭐⭐⭐ </option>
+                <option value="5">5- Excelent ⭐⭐⭐⭐⭐</option>
               </Form.Select>
-            </Form.Group>
+            </Form.Group>{" "}
             <FloatingLabel
               controlId="floatingTextarea"
               label="Comments"
-              className="mb-3"
+              className="mb-3 focus:outline-none focus:shadow-none border-earthly-green border-1 rounded-md"
             >
               <Form.Control
                 as="textarea"
                 placeholder="Leave a comment here"
+                rows={4}
+                cols={4}
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                className="focus:outline-none focus:shadow-none focus:border-earthly-green border-1 border-earthly-green"
+                className="focus:outline-none focus:shadow-none border-earthly-green border-1 rounded-md"
               />
             </FloatingLabel>
-
             <div className="mb-3">
               <Button
                 disabled={loadingCreateReview}
                 type="submit"
-                className="submit-button text-white bg-earthly-green hover:bg-orange border-0"
+                className="submit-button text-white bg-earthly-green hover:bg-orange border-0 mt-4"
               >
                 Submit
               </Button>

@@ -41,6 +41,7 @@ import AyurvedaScreen from "./screens/AyurvedaScreen";
 import AboutScreen from "./screens/AboutScreen";
 import Footer from "./components/Footer.js";
 import AdminContact from "./screens/AdminContact";
+import ReactPlayer from "react-player";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -159,59 +160,90 @@ function App() {
         </div>
         <div className="w-100 bg-earthly-green flex align-middle justify-center static">
           <Nav className="justify-content-end">
-            <Link to="/" className="nav-link text-lg text-white text-center ">
+            <Link
+              to="/"
+              className={`nav-link text-lg text-white text-center pt-${cart.cartItems.length > 0 ? 3 : 2}`}
+            >
               HOME
             </Link>
 
             <Link
               to="/aboutus"
-              className="nav-link text-lg text-white text-center "
+              className={`nav-link text-lg text-white text-center pt-${cart.cartItems.length > 0 ? 3 : 2}`}
             >
               ABOUT US
             </Link>
 
             <Link
               to="/ayurveda"
-              className="nav-link text-lg text-white text-center "
+              className={`nav-link text-lg text-white text-center pt-${cart.cartItems.length > 0 ? 3 : 2}`}
             >
               AYURVEDA
             </Link>
 
             <Link
               to="/contactus"
-              className="nav-link text-lg text-white text-center "
+              className={`nav-link text-lg text-white text-center pt-${cart.cartItems.length > 0 ? 3 : 2}`}
             >
               CONTACT US
             </Link>
 
             <Link
               to="/shop"
-              className="nav-link text-lg text-white text-center "
+              className={`nav-link text-lg text-white text-center pt-${cart.cartItems.length > 0 ? 3 : 2}`}
             >
               SHOP
             </Link>
 
-            <Link
-              to="/cart"
-              className="nav-link text-lg text-white text-center  w-20 relative"
-            >
-              <span>
+            {cart.cartItems.length > 0 ? (
+              <Link
+                to="/cart"
+                className={`nav-link text-lg text-white text-center  w-22 relative`}
+              >
+                {/* <span>
                 <i
                   class="fa fa-shopping-cart fa-1x ml-1"
                   aria-hidden="true"
                 ></i>
-              </span>
-              {cart.cartItems.length > 0 && (
-                <Badge pill bg="danger" className="mx-1 rounded-full absolute">
-                  {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                </Badge>
-              )}
-            </Link>
+              </span> */}
+                {cart.cartItems.length > 0 && (
+                  // <Badge pill bg="danger" className="mx-1 rounded-full absolute">
+                  //   {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                  // </Badge>
+
+                  <button
+                    type="button"
+                    class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white rounded-lg bg-transparent hover:bg-orange transition-none"
+                  >
+                    {/* <svg
+                    class="w-5 h-5"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 16"
+                  >
+                    <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
+                    <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+                  </svg> */}
+                    <i
+                      class="fa fa-shopping-cart fa-1x ml-1"
+                      aria-hidden="true"
+                    ></i>
+                    <span class="sr-only">Notifications</span>
+                    <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                    </div>
+                  </button>
+                )}
+              </Link>
+            ) : null}
             {userInfo ? (
               <NavDropdown
                 title={userInfo.name}
                 id="basic-nav-dropdown"
-                className="text-white text-lg"
+                className={`nav-link text-white  text-center text-lg w-[115px] pt-${
+                  cart.cartItems.length > 0 ? 2 : 0
+                }`}
               >
                 <LinkContainer to="/profile">
                   <NavDropdown.Item>User Profile</NavDropdown.Item>
@@ -230,7 +262,7 @@ function App() {
               </NavDropdown>
             ) : (
               <Link
-                className="nav-link text-lg text-white text-center"
+                className={`nav-link text-lg text-white text-center pt-${cart.cartItems.length > 0 ? 3 : 2}`}
                 to="/signin"
               >
                 SIGN IN
@@ -240,7 +272,7 @@ function App() {
               <NavDropdown
                 title="Admin"
                 id="admin-nav-dropdown"
-                className="text-lg"
+                className={`nav-link w-[110px] text-center text-lg pt-${cart.cartItems.length > 0 ? 2 : 0} mr-3`}
               >
                 <LinkContainer to="/admin/dashboard">
                   <NavDropdown.Item>Dashboard</NavDropdown.Item>

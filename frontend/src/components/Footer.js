@@ -56,7 +56,7 @@ export const Footer = () => {
                 title="Our email"
                 className="transition-colors duration-300 text-gray-400 hover:text-deep-purple-800 pt-3"
               >
-                info@ayurvedamart.com
+                ayurvedamart45@gmail.com
               </a>
             </div>
             <div className="flex">
