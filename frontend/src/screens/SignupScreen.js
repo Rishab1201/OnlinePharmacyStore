@@ -49,14 +49,14 @@ export default function SignupScreen() {
   }, [navigate, redirect, userInfo]);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPassword, setisConfirmPassword] = useState(false);
+  const [isConfirmPassword, setIsConfirmPassword] = useState(false);
 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
 
   const toggleConfirmPassword = () => {
-    setisConfirmPassword((prevState) => !prevState);
+    setIsConfirmPassword((prevState) => !prevState);
   }
 
   return (
@@ -302,8 +302,8 @@ export default function SignupScreen() {
           className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden"
           style={{ maxWidth: 1000 }}
         >
-          <div className="md:flex w-full">
-            <div className="hidden md:block w-1/2 bg-indigo-500 py-10 px-10">
+          <div className="md:flex w-full justify-center align-middle">
+            {/* <div className="hidden md:block w-1/2 bg-indigo-500 py-10 px-10">
               <svg
                 id="a87032b8-5b37-4b7e-a4d9-4dbfbe394641"
                 data-name="Layer 1"
@@ -507,11 +507,11 @@ export default function SignupScreen() {
                   fill="#2f2e41"
                 />
               </svg>
-            </div>
-            <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
+            </div> */}
+            <div className="w-full md:w-[600px] py-10 px-5 md:px-10">
               <div className="text-center mb-10">
-                <h1 className="font-bold text-3xl text-gray-900">REGISTER</h1>
-                <p>Enter your information to register</p>
+                <h1 className="font-bold text-3xl text-gray-900">Sign Up</h1>
+                <p>Enter your information to Sign Up</p>
               </div>
               <div>
                 <div className="flex -mx-3">
@@ -564,7 +564,7 @@ export default function SignupScreen() {
                           type={isPasswordVisible ? "text" : "password"}
                           className="w-full pl-10 -ml-10 rounded-lg pr-3 py-2 rounded-r-lg outline-none "
                           placeholder="************"
-                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          onChange={(e) => setPassword(e.target.value)}
                           required
                         />
                         <button
@@ -686,10 +686,10 @@ export default function SignupScreen() {
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
                     <button
-                      className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                      className="block w-full max-w-xs mx-auto bg-earthly-green hover:bg-slate-300 focus:bg-earthly-green text-white rounded-lg px-3 py-3 font-semibold"
                       onClick={submitHandler}
                     >
-                      REGISTER NOW
+                      SIGN UP NOW
                     </button>
                   </div>
                 </div>

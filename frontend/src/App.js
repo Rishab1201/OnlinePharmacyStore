@@ -241,7 +241,7 @@ function App() {
               <NavDropdown
                 title={userInfo.name}
                 id="basic-nav-dropdown"
-                className={`nav-link text-white  text-center text-lg w-[115px] pt-${
+                className={`nav-link text-white  text-center text-lg w-[180px] pt-${
                   cart.cartItems.length > 0 ? 2 : 0
                 }`}
               >
